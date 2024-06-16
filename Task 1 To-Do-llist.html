@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Bootstrap Bundle -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css'>
+
+    <!-- Font Awesome CSS -->
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+    <!-- MetaData -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .body {
+            border: none;
+            border-radius: 5px;
+        }
+
+        .body h2 {
+            background-color: rgb(128, 0, 137);
+            text-align: center;
+            padding: 10px;
+            color: #fff;
+            margin: 0;
+        }
+
+        .body header {
+            background-color: rgb(128, 0, 137);
+            padding: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        #list-items {
+            margin: 0;
+            padding: 0;
+        }
+
+        #list-items li {
+            cursor: pointer;
+            position: relative;
+            padding: 20px;
+            background: #eee;
+            font-size: 18px;
+            overflow: hidden;
+            transition: 0.3s;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #list-items li:nth-child(odd) {
+            background: #000;
+            color: #fff;
+        }
+
+        input {
+            margin: 0;
+            border: none;
+            border-radius: 5px;
+            width: 80%;
+            margin-right: 20px;
+            padding: 10px;
+            float: left;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <h2 class="form-label">To-Do-List</h2>
+        <header id="header">
+            <input type="text" id="input-field" placeholder="Add your task . . .">
+            <span onclick="AddBtn()" style="padding: 10px;" class="btn btn-success">Add</span>
+        </header>
+    </div>
+    <ul id="list-items">
+        <li>View Your Task</li>
+    </ul>
+
+    <footer>
+        © Copyright: Ahmed Medhat Ramadan
+    </footer>
+
+    <script>
+        var listItem = document.getElementsByTagName("li");
+        var inputField = document.getElementById("input-field");
+        var listOfItems = document.querySelector('ul');
+        var i;
+        for (i = 0; i < listItem.length; i++) {
+            var span = document.createElement("span");
+            var trashCan = document.createElement("i");
+            trashCan.className = "fas fa-trash-alt";
+            trashCan.style.color = "white";
+            span.className = "btn btn-danger";
+            span.style.padding = "20px";
+            span.style.position = "absolute";
+            span.style.top = "0";
+            span.style.right = "0";
+            span.style.bottom = "0";
+            span.style.borderRadius = "1px";
+            span.appendChild(trashCan);
+            listItem[i].appendChild(span);
+        }
+
+        var mainCloseBtn = document.getElementsByClassName("btn btn-danger");
+        var j;
+        for (j = 0; j < mainCloseBtn.length; j++) {
+            mainCloseBtn[j].onclick = function () {
+                var section = this.parentElement;
+                section.style.display = "none";
+            }
+        }
+
+        function AddBtn() {
+            var NewlistItem = document.createElement("li");
+            var inputValue = document.getElementById("input-field").value;
+            var t = document.createTextNode(inputValue);
+            NewlistItem.appendChild(t);
+            if (inputValue === '') {
+                alert("Sorry!, You must enter a task");
+            }
+            else {
+                document.getElementById("list-items").appendChild(NewlistItem);
+            }
+            inputField.value = "";
+
+            var closeBtn = document.createElement("span");
+            var txt = document.createElement("i");
+            txt.className = "fas fa-trash-alt";
+            closeBtn.className = "btn btn-danger";
+            closeBtn.style.padding = "20px";
+            closeBtn.style.position = "absolute";
+            closeBtn.style.top = "0";
+            closeBtn.style.right = "0";
+            closeBtn.style.bottom = "0";
+            closeBtn.style.borderRadius = "1px";
+            closeBtn.appendChild(txt);
+            NewlistItem.appendChild(closeBtn);
+
+            closeBtn.onclick = function (E) {
+                E.preventDefault();
+                listOfItems.removeChild(NewlistItem);
+            }
+        }
+    </script>
+</body>
+
+</html>
