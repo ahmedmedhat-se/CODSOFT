@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock Task #3</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        .DigitalClock {
+            font-family: 'Arial', sans-serif;
+            font-size: 4rem;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            color: #000;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="DigitalClock">
+        <div id="RealTime"></div>
+    </div>
+    <script>
+        const RealTimeClock = document.getElementById('RealTime');
+        function updateTime() {
+            const date = new Date();
+            var hr = date.getHours().toString().padStart(2, '0');
+            var min = date.getMinutes().toString().padStart(2, '0');
+            var sec = date.getSeconds().toString().padStart(2, '0');
+            var DigitalClockRealTime = `${hr}: ${min}: ${sec}`;
+            RealTimeClock.innerHTML = DigitalClockRealTime;
+        }
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+
+</html>
